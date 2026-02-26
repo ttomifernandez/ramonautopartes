@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramon Autopartes | Iluminación y Repuestos en Córdoba</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary-blue: #001A8B;
+            --primary-dark: #000F56;
+            --success-green: #28A745;
+            --success-dark: #1b7430;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .bg-primary { background-color: var(--primary-blue); }
+        .hover\:bg-primary-dark:hover { background-color: var(--primary-dark); }
+        .bg-success { background-color: var(--success-green); }
+        .hover\:bg-success-dark:hover { background-color: var(--success-dark); }
+        .text-primary { color: var(--primary-blue); }
+        .text-success { color: var(--success-green); }
+        .border-primary { border-color: var(--primary-blue); }
+
+        /* Header con contraste garantizado */
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Hero Background */
+        .hero-bg {
+            background: linear-gradient(rgba(0, 26, 139, 0.8), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Card de producto refinada */
+        .category-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 26, 139, 0.12);
+        }
+
+        /* Botón de WhatsApp Flotante */
+        .whatsapp-btn {
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.4);
+        }
+
+        /* Modal logic */
+        #contactModal {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #contactModal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        @media (max-width: 640px) {
+            .mobile-title { font-size: 2.3rem !important; line-height: 1.2; }
+        }
+    </style>
+</head>
+<body class="text-slate-900 overflow-x-hidden">
+
+    <!-- Navegación -->
+    <nav class="fixed top-0 left-0 right-0 z-50 h-20 nav-glass flex items-center border-b border-slate-100 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#inicio" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-md">
+                    <i data-lucide="wrench" class="text-white w-6 h-6"></i>
+                </div>
+                <div class="leading-none">
+                    <span class="text-xl md:text-2xl font-black text-primary tracking-tighter uppercase text-primary">Ramon</span>
+                    <span class="block text-[10px] font-bold text-slate-500 tracking-[0.2em] uppercase">Autopartes</span>
+                </div>
+            </a>
+            
+            <!-- Menú Desktop -->
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest text-slate-600">
+                <a href="#inicio" class="hover:text-primary transition-colors">Inicio</a>
+                <a href="#categorias" class="hover:text-primary transition-colors">Productos</a>
+                <a href="#servicios" class="hover:text-primary transition-colors">Servicios</a>
+                <a href="#nosotros" class="hover:text-primary transition-colors">Nosotros</a>
+                <a href="#contacto" class="hover:text-primary transition-colors">Contacto</a>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="flex items-center space-x-3">
+                <a href="tel:4933125" class="bg-slate-100 p-2.5 rounded-full text-primary hover:bg-slate-200 transition sm:hidden">
+                    <i data-lucide="phone" class="w-5 h-5"></i>
+                </a>
+                <button onclick="openModal('Consulta General')" class="bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all shadow-md">
+                    Pedir Stock
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-bg min-h-[90vh] flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full text-center md:text-left">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.2] mobile-title uppercase">
+                    Equipamos tu auto <br><span class="text-success italic">con Potencia.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-200 mb-10 font-medium leading-relaxed max-w-2xl">
+                    Más de 10 años de trayectoria en Córdoba Capital. Especialistas en iluminación LED, Kits Xenón y una amplia gama de repuestos originales para todas las marcas.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#categorias" class="bg-success hover:bg-success-dark text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center shadow-lg">
+                        Ver Productos
+                        <i data-lucide="chevron-right" class="ml-2 w-5 h-5"></i>
+                    </a>
+                    <button onclick="openModal('Asesoramiento')" class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all">
+                        Hablar con Ramon
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por qué elegirnos -->
+    <section class="py-16 bg-white border-b border-slate-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="flex items-center space-x-5">
+                    <div class="w-14 h-14 bg-blue-50 text-primary rounded-2xl flex items-center justify-center shrink-0">
+                        <i data-lucide="award" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 uppercase text-sm tracking-tighter">+10 Años</h4>
+                        <p class="text-slate-500 text-sm">Experiencia real en el mercado cordobés.</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-5">
+                    <div class="w-14 h-14 bg-green-50 text-success rounded-2xl flex items-center justify-center shrink-0">
+                        <i data-lucide="trending-down" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 uppercase text-sm tracking-tighter">Mejor Precio</h4>
+                        <p class="text-slate-500 text-sm">Competitividad directa en iluminación.</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-5">
+                    <div class="w-14 h-14 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center shrink-0">
+                        <i data-lucide="truck" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 uppercase text-sm tracking-tighter">Envíos</h4>
+                        <p class="text-slate-500 text-sm">Coordinamos la entrega en toda la ciudad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Categorías -->
+    <section id="categorias" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-4">Catálogo Destacado</h2>
+                <p class="text-slate-500 font-medium max-w-2xl mx-auto">Seleccioná una categoría para enviarnos una consulta directa por WhatsApp sobre el repuesto que necesitás.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="category-card bg-white p-8 md:p-10 rounded-[40px] shadow-sm border border-slate-100 flex flex-col">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-blue-200">
+                        <i data-lucide="zap" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">Iluminación LED y Xenón</h3>
+                    <p class="text-slate-500 mb-8 flex-grow leading-relaxed">
+                        Kits Bi-Xenón H4 ($990), lámparas LED Canbus, H1, H3, H7, H11 y faros auxiliares. Máxima visibilidad nocturna.
+                    </p>
+                    <button onclick="openModal('Iluminación')" class="w-full py-4 border-2 border-primary text-primary hover:bg-slate-100 font-black rounded-2xl transition-all uppercase text-sm tracking-widest">
+                        Pedir Cotización
+                    </button>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="category-card bg-white p-8 md:p-10 rounded-[40px] shadow-sm border border-slate-100 flex flex-col">
+                    <div class="w-16 h-16 bg-green-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-green-200">
+                        <i data-lucide="settings-2" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">Tren Delantero</h3>
+                    <p class="text-slate-500 mb-8 flex-grow leading-relaxed">
+                        Amortiguadores, extremos, parrillas, bujes y rótulas. Repuestos de suspensión para un manejo suave y seguro.
+                    </p>
+                    <button onclick="openModal('Tren Delantero')" class="w-full py-4 border-2 border-primary text-primary hover:bg-slate-100 font-black rounded-2xl transition-all uppercase text-sm tracking-widest">
+                        Consultar Stock
+                    </button>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="category-card bg-white p-8 md:p-10 rounded-[40px] shadow-sm border border-slate-100 flex flex-col">
+                    <div class="w-16 h-16 bg-red-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-red-200">
+                        <i data-lucide="cpu" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">Inyección Electrónica</h3>
+                    <p class="text-slate-500 mb-8 flex-grow leading-relaxed">
+                        Sensores, inyectores, bombas de combustible y componentes eléctricos de precisión para tu motor.
+                    </p>
+                    <button onclick="openModal('Inyección')" class="w-full py-4 border-2 border-primary text-primary hover:bg-slate-100 font-black rounded-2xl transition-all uppercase text-sm tracking-widest">
+                        Ver Modelos
+                    </button>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="category-card bg-white p-8 md:p-10 rounded-[40px] shadow-sm border border-slate-100 flex flex-col">
+                    <div class="w-16 h-16 bg-orange-500 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-orange-200">
+                        <i data-lucide="battery-charging" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-900">Encendido y Electricidad</h3>
+                    <p class="text-slate-500 mb-8 flex-grow leading-relaxed">
+                        Baterías de alta gama, alternadores, bujías, cables y bobinas. Todo para que tu auto arranque sin problemas.
+                    </p>
+                    <button onclick="openModal('Electricidad')" class="w-full py-4 border-2 border-primary text-primary hover:bg-slate-100 font-black rounded-2xl transition-all uppercase text-sm tracking-widest">
+                        Pedir Batería
+                    </button>
+                </div>
+
+                <!-- Card 5 (Grande) -->
+                <div class="category-card bg-primary p-8 md:p-10 rounded-[40px] lg:col-span-2 flex flex-col md:flex-row items-center gap-8 text-white relative overflow-hidden">
+                    <div class="z-10 flex-grow">
+                        <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase">Repuestos y Accesorios Generales</h3>
+                        <p class="text-blue-100 mb-8 leading-relaxed">
+                            Ópticas, faros traseros, espejos, equipamiento exterior y accesorios personalizados. Si no lo ves acá, ¡consultanos! Comercializamos una amplia gama de productos para equipar tu vehículo.
+                        </p>
+                        <button onclick="openModal('Accesorios')" class="bg-success hover:bg-success-dark text-white px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest transition-all shadow-xl">
+                            Hacer una consulta general
+                        </button>
+                    </div>
+                    <div class="shrink-0 z-10 hidden md:block opacity-20">
+                        <i data-lucide="package-plus" class="w-40 h-40"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Adicionales -->
+    <section id="servicios" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-4 uppercase italic">Servicios para Vos</h2>
+                <div class="w-16 h-1.5 bg-success mx-auto mb-10"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="flex space-x-6 p-6 border-b border-slate-100">
+                    <i data-lucide="check-circle-2" class="text-success w-10 h-10 shrink-0"></i>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-primary uppercase">Asesoramiento Técnico</h4>
+                        <p class="text-slate-500">No compres a ciegas. Te ayudamos a identificar el modelo exacto de lámpara o repuesto que necesita tu vehículo según marca y año.</p>
+                    </div>
+                </div>
+                <div class="flex space-x-6 p-6 border-b border-slate-100">
+                    <i data-lucide="truck" class="text-success w-10 h-10 shrink-0"></i>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-primary uppercase">Distribución Local</h4>
+                        <p class="text-slate-500">Atendemos a talleres y particulares con la misma dedicación. Consultanos por presupuestos mayoristas.</p>
+                    </div>
+                </div>
+                <div class="flex space-x-6 p-6">
+                    <i data-lucide="shopping-cart" class="text-success w-10 h-10 shrink-0"></i>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-primary uppercase">Venta Directa al Público</h4>
+                        <p class="text-slate-500">Vení a nuestro local y llevate el repuesto en el acto. Contamos con stock permanente para evitar esperas.</p>
+                    </div>
+                </div>
+                <div class="flex space-x-6 p-6">
+                    <i data-lucide="shield-check" class="text-success w-10 h-10 shrink-0"></i>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-primary uppercase">Calidad Garantizada</h4>
+                        <p class="text-slate-500">Trabajamos con primeras marcas para asegurar que cada accesorio cumpla con los estándares de seguridad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nosotros -->
+    <section id="nosotros" class="py-24 bg-slate-50 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-16">
+            <div class="lg:w-1/2 relative">
+                <div class="rounded-[40px] overflow-hidden border-8 border-white shadow-2xl bg-slate-200 aspect-video flex items-center justify-center">
+                    <img src="https://lh3.googleusercontent.com/proxy/wsFXi-eV7f1bMBTb6wOlG-I2tvNHyrgxhTeRkoDFO1kMw3aIoHmjZQnXgcUB4ZuncNCzfrTTiQdr20lE0OAnsDqoTI4kePaTuYjYJvxHq8pCDKApYGoGH7QyxO1zoErJz30b0b951bw3N0L89VHZ1etvky9yaxQHqWhD8Q=s1360-w1360-h1020-rw" 
+                         alt="Frente del Local Ramon Autopartes" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='https://images.unsplash.com/photo-1552650272-b8a34e21bc4b?auto=format&fit=crop&q=80&w=800'">
+                </div>
+                <div class="absolute -top-6 -left-6 bg-success text-white p-6 rounded-3xl font-black text-center shadow-xl">
+                    <div class="text-3xl uppercase">+10</div>
+                    <div class="text-[10px] uppercase tracking-tighter">Años de Confianza</div>
+                </div>
+            </div>
+            <div class="lg:w-1/2">
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-8 italic uppercase tracking-tighter">"Llamá a RAMON"</h2>
+                <p class="text-xl text-slate-500 mb-6 leading-relaxed">
+                    Somos una empresa familiar dedicada a la comercialización y distribución de autopartes en Córdoba Capital (Residencial Sud). Nos especializamos en brindar soluciones rápidas y eficientes para el automóvil.
+                </p>
+                <p class="text-lg text-slate-500 mb-10 leading-relaxed">
+                    Nuestra trayectoria nos permite ofrecer el mejor precio del mercado local en lámparas efecto Xenón y LED, asegurando siempre la calidad de cada componente que sale de nuestro local. Somos un referente en la zona sur por honestidad y rapidez.
+                </p>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-primary text-xl mb-1 uppercase tracking-tighter">Stock</h4>
+                        <p class="text-slate-500 text-sm">Disponibilidad inmediata en iluminación.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-primary text-xl mb-1 uppercase tracking-tighter">Atención</h4>
+                        <p class="text-slate-500 text-sm">Trato directo y asesoramiento honesto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación y Contacto -->
+    <section id="contacto" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div>
+                <h2 class="text-4xl font-black text-slate-900 mb-10 uppercase tracking-tighter">Vení al local</h2>
+                <div class="space-y-10">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-blue-100 text-primary rounded-xl flex items-center justify-center mr-6 shrink-0">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-400 text-[10px] uppercase tracking-widest mb-1">Nuestra Dirección</h4>
+                            <p class="text-xl font-bold text-slate-900 leading-tight italic">Armada Argentina 1796, <br>Residencial Sud, Córdoba.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-green-100 text-success rounded-xl flex items-center justify-center mr-6 shrink-0">
+                            <i data-lucide="clock" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-400 text-[10px] uppercase tracking-widest mb-1">Horarios de Atención</h4>
+                            <p class="text-xl font-bold text-slate-900 leading-tight uppercase">Lun a Sáb: 09:00 a 19:00 hs.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-slate-200 text-slate-600 rounded-xl flex items-center justify-center mr-6 shrink-0">
+                            <i data-lucide="phone-call" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-400 text-[10px] uppercase tracking-widest mb-1 text-slate-500">Teléfonos</h4>
+                            <p class="text-xl font-bold text-slate-900 leading-tight">4933125 (Fijo)</p>
+                            <p class="text-lg font-medium text-slate-600 uppercase">351 641-3517 (WhatsApp)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-[40px] overflow-hidden shadow-2xl h-[450px] border-4 border-white bg-slate-100">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.492147137072!2d-64.2045585!3d-31.4556441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432a297e686940d%3A0x6b4850e50b16867!2sAv.%20Armada%20Argentina%201796%2C%20X5016%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1700000000000!5m2!1ses-419!2sar" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-500 py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-12">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-black text-white tracking-tighter uppercase">Ramon Autopartes</span>
+                </div>
+                <div class="flex space-x-6 text-white font-bold text-sm uppercase">
+                    <a href="#inicio" class="hover:text-success transition">INICIO</a>
+                    <a href="#categorias" class="hover:text-success transition">PRODUCTOS</a>
+                    <a href="#contacto" class="hover:text-success transition">LOCAL</a>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="p-3 bg-white/5 rounded-full hover:bg-white/10 transition text-white"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="#" class="p-3 bg-white/5 rounded-full hover:bg-white/10 transition text-white"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 text-center md:text-left text-[10px] uppercase tracking-widest font-bold">
+                <p>© 2024 Córdoba, Argentina. Especialistas en Iluminación y Autopartes. Armada Argentina 1796.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón WhatsApp Fijo Actualizado -->
+    <a href="https://wa.me/5493516413517" target="_blank" class="whatsapp-btn fixed bottom-6 right-6 z-50 bg-success hover:bg-success-dark text-white p-5 rounded-full flex items-center justify-center transition-transform hover:scale-110">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+        <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-red-500 border-2 border-white"></span>
+        </span>
+    </a>
+
+    <!-- Modal de Consulta -->
+    <div id="contactModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/90 backdrop-blur-md p-4">
+        <div class="bg-white w-full max-w-lg rounded-[40px] shadow-2xl overflow-hidden relative">
+            <button onclick="closeModal()" class="absolute top-6 right-6 p-2 bg-slate-100 rounded-full text-slate-400 hover:text-primary transition">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="p-10 md:p-14">
+                <div class="w-12 h-1 bg-success rounded-full mb-6"></div>
+                <h3 class="text-3xl font-black text-slate-900 mb-2 leading-none uppercase tracking-tighter italic">Consultar Stock</h3>
+                <p class="text-slate-500 mb-8 font-medium">Asesoramiento directo con Ramon por WhatsApp</p>
+                
+                <form id="waForm" class="space-y-5">
+                    <input type="hidden" id="formCategory" value="">
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Tu Nombre</label>
+                        <input type="text" id="userName" required placeholder="Ej: Juan Pérez" class="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary focus:bg-white transition-all font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Vehículo (Marca/Modelo/Año)</label>
+                        <input type="text" id="userAuto" required placeholder="Ej: Fiat Cronos 2021" class="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary focus:bg-white transition-all font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">¿Qué pieza buscás?</label>
+                        <textarea id="userMsg" required rows="3" placeholder="Ej: Busco lámparas LED H7..." class="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary focus:bg-white transition-all font-medium"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-success hover:bg-success-dark text-white font-black py-5 rounded-2xl shadow-xl transition-all flex items-center justify-center uppercase text-sm tracking-widest">
+                        <i data-lucide="send" class="mr-3 w-5 h-5"></i>
+                        Enviar consulta al WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // Lógica de Modales
+        const modal = document.getElementById('contactModal');
+        const formCategoryInput = document.getElementById('formCategory');
+
+        function openModal(category) {
+            formCategoryInput.value = category;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Formulario dinámico a WhatsApp
+        document.getElementById('waForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value;
+            const auto = document.getElementById('userAuto').value;
+            const msg = document.getElementById('userMsg').value;
+            const category = formCategoryInput.value;
+            const phone = "5493516413517"; // Número actualizado
+
+            const text = `Hola Ramon Autopartes! 👋\n\nSoy *${name}* y consulto por: *${category}*.\n\n🚗 *Vehículo:* ${auto}\n🔎 *Busco:* ${msg}`;
+            
+            const encodedText = encodeURIComponent(text);
+            const whatsappUrl = `https://wa.me/${phone}?text=${encodedText}`;
+
+            window.open(whatsappUrl, '_blank');
+            closeModal();
+            this.reset();
+        });
+    </script>
+</body>
+</html>
