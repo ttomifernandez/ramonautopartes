@@ -1,5 +1,88 @@
-<html>
-    <body>
-        Sitio web dado de baja, Comunicate al 3515929043 para levantarlo. Saludos
-    </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitio en Mantenimiento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Contenedor principal con imagen de fondo */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background-color: #25d366; /* Color WhatsApp */
+            color: white;
+            padding: 18px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .cta-button:hover {
+            background-color: #128c7e;
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero-section">
+        <h1>Sitio Fuera de Servicio</h1>
+        <p>Para reactivar este dominio o realizar consultas sobre el servicio, por favor contacta directamente con soporte técnico.</p>
+        
+        <a href="https://wa.me/5493515929043?text=Hola,%20me%20comunico%20para%20solicitar%20la%20reactivación%20de%20este%20sitio%20web." class="cta-button">
+            HABLAR CON SOPORTE
+        </a>
+    </section>
+
+</body>
 </html>
